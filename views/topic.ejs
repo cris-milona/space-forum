@@ -1,0 +1,30 @@
+<%- include('partials/head') -%>
+<body>
+  <%- include('partials/header') -%>
+  <main class="main topic-main">
+    <h1 class="topic-main__heading heading-1" data-main-heading>
+      <%= topic.title %>
+    </h1>
+
+    <div class="posts">
+      <% topic.posts.forEach((post, i) => { %>
+      <p class="posts__post"><%=post.content %></p>
+      <p>
+        <span>Post by <%= authors[i] %></span>
+        <span><%= post.createdAt.toString().split('GMT')[0] %></span>
+      </p>
+      <% }) %>
+    </div>
+
+    <form
+      action="/posts/create/<%= topic._id %>"
+      method="post"
+      class="form-create-post"
+    >
+      <label for="textarea-create-post">Type your post here</label>
+      <textarea name="content" id="textarea-create-post" autofocus></textarea>
+      <button type="submit" class="btn btn-transparent">Create post</button>
+    </form>
+  </main>
+  <%- include('partials/footer') -%>
+</body>

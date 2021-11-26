@@ -1,0 +1,71 @@
+<%- include('partials/head'); -%>
+<body>
+  <%- include('partials/header') -%>
+  <main class="main account-main">
+    <h1 class="account-main__heading heading-1" data-main-heading>
+      My account
+    </h1>
+    <div class="container-actions">
+      <div class="container-avatar">
+        <% if (user.avatar) { %>
+        <img
+          src="data:image/png;base64,<%=user.avatar.toString('base64')%>"
+          alt="avatar"
+        />
+        <% } %>
+      </div>
+      <div class="container-actions-avatar">
+        <form
+          action="/users/me/avatar"
+          method="POST"
+          enctype="multipart/form-data"
+          class="form-update-avatar"
+        >
+          <label for="file-upload">Choose your avatar</label>
+          <input
+            type="file"
+            id="file-upload"
+            name="avatar"
+            accept="image/png, image/jpeg, image/jpg"
+          />
+          <button type="submit" class="btn btn-transparent upload-avatar">
+            Upload avatar
+          </button>
+        </form>
+        <button class="btn btn-delete delete-avatar" data-delete-avatar-btn>
+          Delete avatar
+        </button>
+      </div>
+    </div>
+
+    <form action="/account/update" method="post" class="form-update-account">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit" class="btn btn-transparent update-account">
+        Update account
+      </button>
+    </form>
+
+    <div class="user-posts">
+      <% if (user.posts) { %>
+      <h2 class="user-posts__title">My posts</h2>
+      <% user.posts.forEach((post)=> { %>
+
+      <div class="user-posts__post">
+        <p><%= post.content %></p>
+        <button class="btn-anchor" data-delete-post-btn="<%= post._id %>">
+          Delete post
+        </button>
+      </div>
+      <% })} else { %>
+      <p>No posts yet</p>
+      <% } %>
+    </div>
+    <button class="btn btn-delete delete-account" data-delete-account-btn>
+      Delete account
+    </button>
+  </main>
+  <%- include('partials/footer') -%>
+</body>

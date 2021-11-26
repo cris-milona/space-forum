@@ -1,0 +1,45 @@
+.posts {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 2em;
+
+  &__post {
+    margin-top: 1.5em;
+    word-wrap: break-word;
+  }
+  & span {
+    font-size: 1rem;
+    color: $neon-1;
+  }
+}
+
+.form-create-post {
+  margin-top: 2em;
+
+  & textarea {
+    display: block;
+    width: 100%;
+    height: clamp(10rem, 50vw, 17rem);
+    background-color: $neon-2;
+    font-size: 1.6rem;
+    color: $background-color;
+  }
+
+  & button {
+    display: block;
+    margin: 1em 0 0 auto;
+  }
+}
+
+@media screen and(min-width: $bp-850) {
+  .posts span {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and(min-width: $bp-1500) {
+  .posts span {
+    font-size: 1.5rem;
+  }
+}

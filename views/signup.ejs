@@ -1,0 +1,39 @@
+<%- include('partials/head') -%>
+<body>
+  <%- include('partials/header') -%>
+  <main class="main">
+    <div class="credentials-container">
+      <form action="/signup" method="POST" class="credentials-form">
+        <label for="email">Email address</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          required
+          class="form-input"
+        />
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          class="form-input"
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class="form-input"
+        />
+        <button class="credentials-btn btn btn-solid">Sign up</button>
+        <% if (error) { %>
+        <p><%=error%></p>
+        <% } %>
+      </form>
+    </div>
+  </main>
+  <%- include('partials/footer') -%>
+</body>

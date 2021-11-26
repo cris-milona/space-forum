@@ -1,0 +1,21 @@
+.credentials-container {
+  box-shadow: 0 1rem 1rem rgba($background-color, 0.3);
+  width: clamp(300px, 70%, 500px);
+  margin: 0 auto;
+}
+
+.credentials-form {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1.5em 1em;
+
+  & label {
+    font-style: italic;
+    padding: 0.5em;
+  }
+}
+
+.credentials-btn {
+  margin-top: 2em;
+}

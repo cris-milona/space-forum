@@ -1,0 +1,103 @@
+.home-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+
+  &__heading {
+    margin-block: 1em;
+  }
+}
+
+.home-guides {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.popular-topics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 2em;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.container-topic {
+  display: grid;
+  grid-template-areas:
+    'title posts'
+    'date date';
+
+  width: 80%;
+  margin: 0 auto;
+
+  &__title {
+    grid-area: title;
+    font-weight: 600;
+    font-style: italic;
+
+    transition: color 0.3s;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $neon-1;
+    }
+  }
+
+  &__posts-sum {
+    grid-area: posts;
+    display: inline-block;
+    justify-self: end;
+
+    & p {
+      display: inline-block;
+      font-size: 1rem;
+    }
+  }
+
+  &__date {
+    grid-area: date;
+    font-size: 1rem;
+  }
+
+  & svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: white;
+  }
+}
+
+.form-search {
+  & input {
+    width: 65%;
+    margin-right: 0.5em;
+  }
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 2em;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.form-create-topic {
+  & input {
+    width: 65%;
+    margin-right: 0.5em;
+  }
+}
+
+.online {
+  &__names {
+    display: flex;
+    gap: 0.25em;
+
+    & p::before {
+      content: '|';
+      height: 100%;
+      color: $neon-1;
+    }
+  }
+}

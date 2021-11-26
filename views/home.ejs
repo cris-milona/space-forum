@@ -1,0 +1,93 @@
+<%- include('partials/head'); -%>
+<body>
+  <%- include('partials/header') -%>
+  <main class="main home-main">
+    <h1 class="home-main__heading heading-1" data-main-heading>
+      A place to share our passion for the universe
+    </h1>
+    <p class="popular-topics-heading home-guides">
+      Explore the most popular topics...
+    </p>
+
+    <div class="popular-topics">
+      <% if (topics) { topics.forEach((topic)=> { %>
+      <div class="container-topic">
+        <a href="/topics/find/<%= topic._id %>" class="container-topic__title"
+          ><%= topic.title %></a
+        >
+        <div class="container-topic__posts-sum">
+          <svg>
+            <use href="/img/icomoon/sprite.svg#icon-file-text"></use>
+          </svg>
+          <p><%= topic.postsNumber %></p>
+        </div>
+        <p class="container-topic__date">
+          <%= topic.updatedAt.toString().split('GMT')[0] %>
+        </p>
+      </div>
+      <% })} %>
+    </div>
+    <form action="/topics/search" method="post" class="form-search">
+      <label for="search-topic" class="home-guides"
+        >...or search for a specific one.</label
+      >
+      <input
+        type="text"
+        id="search-topic"
+        name="search"
+        placeholder="Search for a topic"
+      />
+      <button type="submit" class="btn btn-transparent">Search</button>
+    </form>
+
+    <div class="search-results">
+      <% if (searchResults) { searchResults.forEach((topic)=> { %>
+
+      <div class="container-topic">
+        <a href="/topics/find/<%= topic._id %>" class="container-topic__title"
+          ><%= topic.title %></a
+        >
+        <div class="container-topic__posts-sum">
+          <svg>
+            <use href="/img/icomoon/sprite.svg#icon-file-text"></use>
+          </svg>
+          <p><%= topic.postsNumber %></p>
+        </div>
+        <p class="container-topic__date">
+          <%= topic.createdAt.toString().split('GMT')[0] %>
+        </p>
+      </div>
+
+      <% })} %> <% if (message) { %>
+      <p class="search-results__message"><%= message %></p>
+      <% } %>
+    </div>
+    <% if (user) { %>
+    <form action="/topics/create" method="POST" class="form-create-topic">
+      <label for="create-topic" class="home-guides"
+        >Create a brand new topic...</label
+      >
+      <input
+        type="text"
+        id="create-topic"
+        name="title"
+        placeholder="Type topic's title here..."
+        required
+      />
+      <button type="submit" class="btn btn-transparent">Create</button>
+    </form>
+
+    <div class="online">
+      <p class="online__heading home-guides">
+        ...and get in touch with aliens currently online.
+      </p>
+      <div class="online__names">
+        <% if (usernamesOnline) { usernamesOnline.forEach((username)=> { %>
+        <p><%= username %></p>
+        <% })} %>
+      </div>
+    </div>
+    <% } %>
+  </main>
+  <%- include('partials/footer') -%>
+</body>

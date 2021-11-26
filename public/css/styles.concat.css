@@ -1,0 +1,507 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::selection {
+  color: #fff;
+  background-color: #7777c5;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: inherit;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  color: white;
+  background: linear-gradient(45deg, rgba(38, 38, 38, 0.95) 50%, rgba(38, 38, 38, 0.4)), url("/img/space1-l_andy-holmes.jpg");
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+a:link, a:active, a:visited {
+  color: currentColor;
+}
+
+input {
+  font-size: inherit;
+  padding: 0.5em;
+  border: 2px solid #e8e500;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #e8e500;
+}
+
+.main {
+  width: min(90%, 1200px);
+  min-height: 80vh;
+  margin: 0 auto;
+  padding-block: 1em 2em;
+}
+
+.heading-1 {
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+}
+
+.btn {
+  padding: 0.5em 1em;
+  border: 2px solid #e8e500;
+  border-radius: 5px;
+  font-size: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-solid {
+  background-color: #e8e500;
+  color: #262626;
+}
+.btn-solid:hover, .btn-solid:focus {
+  background-color: transparent;
+  color: #e8e500;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  color: #e8e500;
+}
+.btn-transparent:hover, .btn-transparent:focus, .btn-transparent:active {
+  background-color: #e8e500;
+  color: #262626;
+}
+
+.btn-delete {
+  border: 2px solid #e81717;
+  background-color: transparent;
+  color: #e81717;
+}
+.btn-delete:hover, .btn-delete:focus, .btn-delete:active {
+  background-color: #e81717;
+  color: #262626;
+}
+
+.btn-anchor {
+  border: none;
+  border-bottom: 2px solid currentColor;
+  background-color: transparent;
+  font-size: 1.4rem;
+  color: #7777c5;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+@media screen and (min-width: 53.125em) {
+  body {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (min-width: 93.75em) {
+  body {
+    font-size: 2rem;
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: min(100%, 1500px);
+  min-height: 12vh;
+  margin: 0 auto;
+  z-index: 10;
+  transition: all 0.1s ease-in;
+}
+.header__logo {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  line-height: 1;
+  font-size: clamp(3rem, 4.5vw, 6rem);
+  color: #e8e500;
+  margin-left: 0.5em;
+  z-index: 200;
+  position: relative;
+}
+.header__decoration {
+  position: absolute;
+  top: 49%;
+  left: 0.25em;
+  width: clamp(23rem, 35vw, 45rem);
+  height: 1rem;
+  background-color: #7777c5;
+  z-index: 100;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  /* Navigation styling */
+}
+.menu__icon {
+  width: clamp(4.5rem, 7vw, 9rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #7777c5;
+  overflow: hidden;
+  object-fit: cover;
+  cursor: pointer;
+}
+.menu__dropdown-icon {
+  padding: 0.5em;
+  font-size: clamp(1.25rem, 2vw, 2.5rem);
+  color: #e8e500;
+  cursor: pointer;
+}
+.menu__navbar {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  padding: 1em 2em;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(38, 38, 38, 0.97);
+}
+@supports (backdrop-filter: blur()) {
+  .menu__navbar {
+    backdrop-filter: blur(15px);
+    background-color: rgba(38, 38, 38, 0.6);
+  }
+}
+.menu__navbar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: center;
+  margin-top: 14em;
+}
+.menu__navbar ul button {
+  font-size: 2rem;
+}
+.menu__navbar ul a {
+  padding: 0.5em 1.25em;
+  text-decoration: none;
+  font-size: 2rem;
+}
+.menu__navbar ul a:hover {
+  color: #e8e500;
+}
+
+.active {
+  display: block;
+  transform: translateX(-100%);
+  transition: all 0.5s ease-in-out;
+}
+
+.opaque {
+  background-color: #262626;
+}
+
+@media screen and (min-width: 25em) {
+  .header {
+    padding: 2em 1em;
+  }
+  .header__decoration {
+    left: 1em;
+  }
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+  width: min(100%, 1500px);
+  min-height: 8vh;
+  margin: 0 auto;
+  background-color: transparent;
+}
+.footer__logo {
+  margin-left: 1em;
+  font-family: "Merriweather", serif;
+  font-size: 2rem;
+  color: #7777c5;
+}
+.footer__copyright {
+  margin-right: 1em;
+  font-size: 1rem;
+}
+.footer span {
+  font-weight: 700;
+}
+.footer a {
+  color: #7777c5;
+  padding-block: 1em;
+  transition: color 0.3s;
+}
+.footer a:hover, .footer a:focus, .footer a:active {
+  color: #e8e500;
+}
+
+@media screen and (min-width: 53.125em) {
+  .footer__logo {
+    font-size: 2.5rem;
+  }
+  .footer__copyright {
+    font-size: 1.25rem;
+  }
+}
+@media screen and (min-width: 93.75em) {
+  .footer__logo {
+    font-size: 3rem;
+  }
+  .footer__copyright {
+    font-size: 1.5rem;
+  }
+}
+.home-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.home-main__heading {
+  margin-block: 1em;
+}
+
+.home-guides {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.popular-topics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 2em;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.container-topic {
+  display: grid;
+  grid-template-areas: "title posts" "date date";
+  width: 80%;
+  margin: 0 auto;
+}
+.container-topic__title {
+  grid-area: title;
+  font-weight: 600;
+  font-style: italic;
+  transition: color 0.3s;
+}
+.container-topic__title:hover, .container-topic__title:focus, .container-topic__title:active {
+  color: #e8e500;
+}
+.container-topic__posts-sum {
+  grid-area: posts;
+  display: inline-block;
+  justify-self: end;
+}
+.container-topic__posts-sum p {
+  display: inline-block;
+  font-size: 1rem;
+}
+.container-topic__date {
+  grid-area: date;
+  font-size: 1rem;
+}
+.container-topic svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: white;
+}
+
+.form-search input {
+  width: 65%;
+  margin-right: 0.5em;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 2em;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.form-create-topic input {
+  width: 65%;
+  margin-right: 0.5em;
+}
+
+.online__names {
+  display: flex;
+  gap: 0.25em;
+}
+.online__names p::before {
+  content: "|";
+  height: 100%;
+  color: #e8e500;
+}
+
+.container-avatar {
+  width: 8em;
+  height: 8em;
+  border-radius: 50%;
+  background-color: #7777c5;
+  margin-top: 2em;
+  overflow: hidden;
+  object-fit: cover;
+}
+.container-avatar img {
+  width: 100%;
+}
+
+input[type=file]::file-selector-button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-update-avatar {
+  margin-top: 2em;
+}
+.form-update-avatar input {
+  display: block;
+  max-width: 80%;
+}
+
+.form-update-account {
+  margin: 2em 0;
+}
+.form-update-account input {
+  display: block;
+  width: clamp(250px, 80%, 400px);
+}
+
+.user-posts {
+  display: flex;
+  flex-direction: column;
+}
+.user-posts__post {
+  margin-top: 1em;
+}
+.user-posts__post p {
+  display: inline;
+  word-wrap: break-word;
+}
+.user-posts__post button {
+  transform: translateY(-2px);
+}
+.user-posts__post button:hover {
+  color: #e81717;
+}
+
+.delete-avatar,
+.upload-avatar,
+.update-account,
+.delete-account {
+  margin-top: 1em;
+}
+
+.delete-account {
+  display: block;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 53.125em) {
+  .container-actions {
+    display: flex;
+    gap: 7em;
+  }
+}
+.posts {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+.posts__post {
+  margin-top: 1.5em;
+  word-wrap: break-word;
+}
+.posts span {
+  font-size: 1rem;
+  color: #e8e500;
+}
+
+.form-create-post {
+  margin-top: 2em;
+}
+.form-create-post textarea {
+  display: block;
+  width: 100%;
+  height: clamp(10rem, 50vw, 17rem);
+  background-color: #d1d09f;
+  font-size: 1.6rem;
+  color: #262626;
+}
+.form-create-post button {
+  display: block;
+  margin: 1em 0 0 auto;
+}
+
+@media screen and (min-width: 53.125em) {
+  .posts span {
+    font-size: 1.25rem;
+  }
+}
+@media screen and (min-width: 93.75em) {
+  .posts span {
+    font-size: 1.5rem;
+  }
+}
+.credentials-container {
+  box-shadow: 0 1rem 1rem rgba(38, 38, 38, 0.3);
+  width: clamp(300px, 70%, 500px);
+  margin: 0 auto;
+}
+
+.credentials-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 1em;
+}
+.credentials-form label {
+  font-style: italic;
+  padding: 0.5em;
+}
+
+.credentials-btn {
+  margin-top: 2em;
+}
+
+.container-error {
+  margin: 2em auto 0;
+  text-align: center;
+}
+
+.error-message {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=styles.comp.css.map */

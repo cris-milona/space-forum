@@ -1,0 +1,33 @@
+<header class="header" data-header>
+  <p class="header__logo">Space Forum</p>
+  <div class="header__decoration"></div>
+  <div class="menu" data-menu>
+    <div class="menu__icon">
+      <% if (user && user.avatar) { %>
+      <img
+        src="data:image/png;base64,<%=user.avatar.toString('base64')%>"
+        alt="avatar"
+      />
+      <% } %>
+    </div>
+    <div class="menu__dropdown-icon" data-menu-dropdown-icon>
+      &blacktriangledown;
+    </div>
+    <nav class="menu__navbar" data-menu-navbar>
+      <ul>
+        <% if (!user) { %>
+        <li><a href="/">Home</a></li>
+        <li><a href="/signup">Sign up</a></li>
+        <li><a href="/signin">Log in</a></li>
+        <% } else { %>
+        <li><a href="/">Home</a></li>
+        <li><a href="/account">My account</a></li>
+        <li><a href="/rules">Code of contact</a></li>
+        <li>
+          <button class="btn btn-transparent" data-btn-logout>Logout</button>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>

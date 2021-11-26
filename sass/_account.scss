@@ -1,0 +1,81 @@
+.container-avatar {
+  width: 8em;
+  height: 8em;
+  border-radius: 50%;
+  background-color: $neon-purple;
+
+  margin-top: 2em;
+
+  overflow: hidden;
+  object-fit: cover;
+
+  & img {
+    width: 100%;
+  }
+}
+
+input[type='file']::file-selector-button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-update-avatar {
+  margin-top: 2em;
+
+  & input {
+    display: block;
+    max-width: 80%;
+  }
+}
+
+.form-update-account {
+  margin: 2em 0;
+
+  & input {
+    display: block;
+    width: clamp(250px, 80%, 400px);
+  }
+}
+
+.user-posts {
+  display: flex;
+  flex-direction: column;
+
+  &__post {
+    margin-top: 1em;
+
+    & p {
+      display: inline;
+      word-wrap: break-word;
+    }
+
+    & button {
+      transform: translateY(-2px);
+
+      &:hover {
+        color: $neon-4;
+      }
+    }
+  }
+}
+
+.delete-avatar,
+.upload-avatar,
+.update-account,
+.delete-account {
+  margin-top: 1em;
+}
+
+.delete-account {
+  display: block;
+  margin-left: auto;
+}
+
+@media screen and (min-width: $bp-850) {
+  .container-actions {
+    display: flex;
+    gap: 7em;
+  }
+}

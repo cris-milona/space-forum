@@ -1,0 +1,161 @@
+//variables
+$background-color: hsl(42, 0%, 15%);
+$neon-purple: hsl(240, 40%, 62%);
+$neon-1: #e8e500;
+$neon-2: hsl(59, 35%, 72%);
+$light-blue: #bbe9df;
+$neon-4: hsl(0, 82%, 50%);
+$ff-heading: 'Merriweather', serif;
+$ff-text: 'Open Sans', sans-serif;
+
+//breakpoints
+$bp-400: 25em;
+$bp-850: 53.125em;
+$bp-1500: 93.75em;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::selection {
+  color: #fff;
+  background-color: $neon-purple;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: inherit;
+  font-family: $ff-text;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  color: white;
+
+  background: linear-gradient(
+      45deg,
+      rgba($background-color, 0.95) 50%,
+      rgba($background-color, 0.4)
+    ),
+    url('/img/space1-l_andy-holmes.jpg');
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+
+  &:link,
+  &:active,
+  &:visited {
+    color: currentColor;
+  }
+}
+
+input {
+  font-size: inherit;
+  padding: 0.5em;
+  border: 2px solid $neon-1;
+  border-radius: 5px;
+  background-color: transparent;
+  color: $neon-1;
+}
+
+.main {
+  width: min(90%, 1200px);
+  min-height: 80vh;
+  margin: 0 auto;
+  padding-block: 1em 2em;
+}
+
+.heading-1 {
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+}
+
+.btn {
+  padding: 0.5em 1em;
+  border: 2px solid $neon-1;
+  border-radius: 5px;
+
+  font-size: inherit;
+
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-solid {
+  background-color: $neon-1;
+  color: $background-color;
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    color: $neon-1;
+  }
+}
+
+.btn-transparent {
+  background-color: transparent;
+  color: $neon-1;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $neon-1;
+    color: $background-color;
+  }
+}
+
+.btn-delete {
+  border: 2px solid $neon-4;
+  background-color: transparent;
+  color: $neon-4;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $neon-4;
+    color: $background-color;
+  }
+}
+
+.btn-anchor {
+  border: none;
+  border-bottom: 2px solid currentColor;
+  background-color: transparent;
+
+  font-size: 1.4rem;
+  color: $neon-purple;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+@media screen and(min-width: $bp-850) {
+  body {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and(min-width: $bp-1500) {
+  body {
+    font-size: 2rem;
+  }
+}
