@@ -23,16 +23,18 @@ router.post('/topics/create', auth, async (req, res) => {
 router.get('/topics/find/:id', async (req, res) => {
   try {
     const topic = await Topic.findById(req.params.id);
-    await topic.populate('posts').execPopulate();
+    const topicsPosts = await topic.populate('posts').execPopulate();
 
-    const authors = await Promise.all(
-      topic.posts.map(async (post) => {
-        const author = await User.findById(post.owner);
+    const authors = [];
+    if (topicsPosts) {
+      authors = await Promise.all(
+        topic.posts.map(async (post) => {
+          const author = await User.findById(post.owner);
 
-        return author.username;
-      })
-    );
-
+          return author.username;
+        })
+      );
+    }
     const user = await User.findById(req.session.userId);
 
     res.render('topic', { user: user || null, topic, authors });

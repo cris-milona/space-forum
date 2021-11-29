@@ -14,12 +14,13 @@ const router = new express.Router();
 router.get('/', async (req, res) => {
   try {
     const topics = await fetchAllTopics(req, res);
-    topics.forEach(async (topic) => {
-      await topic.populate('posts').execPopulate();
-      topic.postsNumber = topic.posts.length;
-      await topic.save();
-    });
-
+    if (topics) {
+      topics.forEach(async (topic) => {
+        await topic.populate('posts').execPopulate();
+        topic.postsNumber = topic.posts.length;
+        await topic.save();
+      });
+    }
     if (!req.session.userId) {
       res.render('home', {
         user: null,

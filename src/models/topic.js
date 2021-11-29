@@ -31,7 +31,7 @@ const topicSchema = new mongoose.Schema(
     },
   },
 
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
 //creates a virtual connection with post model

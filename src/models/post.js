@@ -23,7 +23,10 @@ const postSchema = new mongoose.Schema(
       ref: 'Topic',
     },
   },
-  { timestamps: { createdAt: true, updatedAt: false } }
+  {
+    timestamps: { createdAt: true, updatedAt: false },
+    toJSON: { virtuals: true },
+  }
 );
 
 const Post = mongoose.model('Post', postSchema);
