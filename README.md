@@ -10,4 +10,4 @@ It was built using:
 
 A user visiting the forum, can read the topics and posts created. On the other hand, when creating an account, the authorized user is able to create a new topic, write and delete posts, have access to the account page and change account settings as well as add or remove an avatar.
 
-You can find it deployed at 
+You can find it deployed at https://space-forum.herokuapp.com/ 
