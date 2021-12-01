@@ -25,14 +25,12 @@ const fetchAllTopics = async (req, res) => {
 
 //get all posts a user has created
 const getUsersPosts = async (req) => {
-  await req.user
-    .populate({
-      path: 'posts',
-      options: {
-        sort: { createdAt: '-1' },
-      },
-    })
-    .execPopulate();
+  await req.user.populate({
+    path: 'posts',
+    options: {
+      sort: { createdAt: '-1' },
+    },
+  });
   const results = req.user.posts.map((post) => {
     return post.content;
   });

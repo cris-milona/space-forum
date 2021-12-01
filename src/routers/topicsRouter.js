@@ -1,7 +1,7 @@
 const express = require('express');
-const Topic = require('../models/topic');
 const auth = require('../middleware/auth');
 const { whoIsOnline } = require('../utils/functions');
+const Topic = require('../models/topic');
 const Post = require('../models/post');
 const User = require('../models/user');
 
@@ -23,18 +23,16 @@ router.post('/topics/create', auth, async (req, res) => {
 router.get('/topics/find/:id', async (req, res) => {
   try {
     const topic = await Topic.findById(req.params.id);
-    const topicsPosts = await topic.populate('posts').execPopulate();
+    await topic.populate('posts');
 
-    const authors = [];
-    if (topicsPosts) {
-      authors = await Promise.all(
-        topic.posts.map(async (post) => {
-          const author = await User.findById(post.owner);
+    const authors = await Promise.all(
+      topic.posts.map(async (post) => {
+        const author = await User.findById(post.owner);
 
-          return author.username;
-        })
-      );
-    }
+        return author.username;
+      })
+    );
+
     const user = await User.findById(req.session.userId);
 
     res.render('topic', { user: user || null, topic, authors });
@@ -44,8 +42,9 @@ router.get('/topics/find/:id', async (req, res) => {
 });
 
 //search for specific topic
-router.post('/topics/search', auth, async (req, res) => {
+router.post('/topics/search', async (req, res) => {
   try {
+    const user = await User.findById(req.session.userId);
     const topics = await Topic.find({});
     const searchTerms = req.body.search.toLowerCase().split(' ');
     const searchResults = [];
@@ -61,15 +60,26 @@ router.post('/topics/search', auth, async (req, res) => {
     if (searchResults.length === 0) {
       message = 'Topic not found, try another search';
     }
-    const usernamesOnline = await whoIsOnline();
 
-    res.render('home', {
-      user: req.user,
-      usernamesOnline,
-      topics,
-      searchResults,
-      message,
-    });
+    if (!user) {
+      res.render('home', {
+        user: null,
+        usernamesOnline: null,
+        topics,
+        searchResults,
+        message,
+      });
+    } else {
+      const usernamesOnline = await whoIsOnline();
+
+      res.render('home', {
+        user,
+        usernamesOnline,
+        topics,
+        searchResults,
+        message,
+      });
+    }
   } catch (e) {
     res.render('error', { user: req.user, errorMessage: e.message });
   }

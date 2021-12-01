@@ -26,6 +26,7 @@ const postSchema = new mongoose.Schema(
   {
     timestamps: { createdAt: true, updatedAt: false },
     toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 

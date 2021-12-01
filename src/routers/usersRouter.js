@@ -1,10 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
-const auth = require('../middleware/auth');
 const multer = require('multer');
 const sharp = require('sharp');
 const { getUsersPosts } = require('../utils/functions');
+const auth = require('../middleware/auth');
+const User = require('../models/user');
+
 const router = new express.Router();
 
 //setting up multer
@@ -33,7 +34,7 @@ router.post('/signup', async (req, res) => {
     req.session.userId = user._id;
     res.redirect('/');
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res.render('signup', { user: null, error: e.message });
   }
 });
 
@@ -49,7 +50,7 @@ router.post('/signin', async (req, res) => {
     await user.save();
     res.redirect('/');
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res.render('signin', { user: null, error: e.message });
   }
 });
 

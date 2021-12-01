@@ -1,7 +1,7 @@
 const express = require('express');
-const Post = require('../models/post');
 const auth = require('../middleware/auth');
 const multer = require('multer');
+const Post = require('../models/post');
 
 const router = new express.Router();
 
@@ -16,11 +16,11 @@ router.post('/posts/create/:id', auth, async (req, res) => {
   try {
     const post = new Post({
       ...req.body,
-      owner: req.user,
+      owner: req.user._id,
       relatedTopic: req.params.id,
     });
 
-    post.populate('owner').execPopulate();
+    await post.populate('owner');
     await post.save();
     res.redirect(`/topics/find/${req.params.id}`);
   } catch (e) {

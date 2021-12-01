@@ -21,12 +21,14 @@
           </svg>
           <p><%= topic.postsNumber %></p>
         </div>
+
         <p class="container-topic__date">
           <%= topic.createdAt.toString().split('GMT')[0] %>
         </p>
       </div>
       <% })} %>
     </div>
+
     <form action="/topics/search" method="post" class="form-search">
       <label for="search-topic" class="home-guides"
         >...or search for a specific one.</label
@@ -57,11 +59,11 @@
           <%= topic.createdAt.toString().split('GMT')[0] %>
         </p>
       </div>
-
       <% })} %> <% if (message) { %>
       <p class="search-results__message"><%= message %></p>
       <% } %>
     </div>
+
     <% if (user) { %>
     <form action="/topics/create" method="POST" class="form-create-topic">
       <label for="create-topic" class="home-guides"
