@@ -114,7 +114,14 @@
 }
 
 .opaque {
-  background-color: $background-color;
+  background: linear-gradient(
+      rgba($background-color, 0.95) 50%,
+      rgba($background-color, 0.9)
+    ),
+    url('/img/space1-l_andy-holmes.jpg');
+  background-size: cover;
+  background-position: bottom;
+  background-blend-mode: multiply;
 }
 
 @media screen and (min-width: $bp-400) {

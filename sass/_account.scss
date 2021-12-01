@@ -17,7 +17,7 @@
 input[type='file']::file-selector-button {
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: $neon-1;
   cursor: pointer;
 }
 
@@ -54,7 +54,9 @@ input[type='file']::file-selector-button {
     & button {
       transform: translateY(-2px);
 
-      &:hover {
+      &:hover,
+      &:focus,
+      &:active {
         color: $neon-4;
       }
     }
