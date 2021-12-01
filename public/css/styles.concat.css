@@ -7,7 +7,7 @@
 }
 
 *::selection {
-  color: #fff;
+  color: #f2f2f2;
   background-color: #7777c5;
 }
 
@@ -22,7 +22,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   letter-spacing: 1px;
-  color: white;
+  color: #f2f2f2;
   background: linear-gradient(45deg, rgba(38, 38, 38, 0.95) 50%, rgba(38, 38, 38, 0.4)), url("/img/space1-l_andy-holmes.jpg");
   background-size: cover;
   background-blend-mode: multiply;
@@ -44,13 +44,24 @@ a:link, a:active, a:visited {
   color: currentColor;
 }
 
-input {
+input,
+textarea {
   font-size: inherit;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 1px;
   padding: 0.5em;
   border: 2px solid #e8e500;
   border-radius: 5px;
   background-color: transparent;
-  color: #e8e500;
+  color: #f2f2f2;
+  outline: none;
+  transition: all 0.25s;
+}
+input:focus,
+textarea:focus {
+  border: 2px solid #7777c5;
 }
 
 .main {
@@ -71,6 +82,8 @@ input {
   border: 2px solid #e8e500;
   border-radius: 5px;
   font-size: inherit;
+  font-weight: 700;
+  outline: none;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -110,7 +123,6 @@ input {
   font-size: 1.4rem;
   color: #7777c5;
   cursor: pointer;
-  transition: all 0.2s;
 }
 
 @media screen and (min-width: 53.125em) {
@@ -219,7 +231,10 @@ input {
 }
 
 .opaque {
-  background-color: #262626;
+  background: linear-gradient(rgba(38, 38, 38, 0.95) 50%, rgba(38, 38, 38, 0.9)), url("/img/space1-l_andy-holmes.jpg");
+  background-size: cover;
+  background-position: bottom;
+  background-blend-mode: multiply;
 }
 
 @media screen and (min-width: 25em) {
@@ -323,6 +338,7 @@ input {
 .container-topic__posts-sum p {
   display: inline-block;
   font-size: 1rem;
+  font-weight: 700;
 }
 .container-topic__date {
   grid-area: date;
@@ -331,7 +347,7 @@ input {
 .container-topic svg {
   width: 1.5rem;
   height: 1.5rem;
-  fill: white;
+  fill: #f2f2f2;
 }
 
 .form-search input {
@@ -359,7 +375,7 @@ input {
 .online__names p::before {
   content: "|";
   height: 100%;
-  color: #e8e500;
+  color: #7777c5;
 }
 
 .container-avatar {
@@ -378,7 +394,7 @@ input {
 input[type=file]::file-selector-button {
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: #e8e500;
   cursor: pointer;
 }
 
@@ -412,7 +428,7 @@ input[type=file]::file-selector-button {
 .user-posts__post button {
   transform: translateY(-2px);
 }
-.user-posts__post button:hover {
+.user-posts__post button:hover, .user-posts__post button:focus, .user-posts__post button:active {
   color: #e81717;
 }
 
@@ -455,9 +471,6 @@ input[type=file]::file-selector-button {
   display: block;
   width: 100%;
   height: clamp(10rem, 50vw, 17rem);
-  background-color: #d1d09f;
-  font-size: 1.6rem;
-  color: #262626;
 }
 .form-create-post button {
   display: block;
