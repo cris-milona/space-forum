@@ -11,7 +11,7 @@ const upload = multer({
   },
 });
 
-//create new post
+// create new post
 router.post('/posts/create/:id', auth, async (req, res) => {
   try {
     const post = new Post({
@@ -22,20 +22,22 @@ router.post('/posts/create/:id', auth, async (req, res) => {
 
     await post.populate('owner');
     await post.save();
-    res.redirect(`/topics/find/${req.params.id}`);
+    res.status(201).redirect(`/topics/find/${req.params.id}`);
   } catch (e) {
     const errorMessage = 'You cannot post if you are not logged in';
-    res.render('error', { user: req.user, errorMessage });
+    res.status(401).render('error', { user: req.user, errorMessage });
   }
 });
 
-//delete a post
+// delete a post
 router.delete('/posts/delete/:id', auth, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
-    res.status(200).send();
+    res.status(200).send('Post deleted successfully');
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res
+      .status(503)
+      .render('error', { user: req.user, errorMessage: e.message });
   }
 });
 

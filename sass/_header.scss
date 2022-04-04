@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2em 0;
+  padding: 3em 0;
 
   position: sticky;
   top: 0;
   left: 0;
   width: min(100%, 1500px);
-  min-height: 12vh;
+  height: 12vh;
   margin: 0 auto;
 
   z-index: 10;

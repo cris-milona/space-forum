@@ -10,7 +10,7 @@ const User = require('../models/user');
 
 const router = new express.Router();
 
-//home page
+// home page
 router.get('/', async (req, res) => {
   try {
     const topics = await fetchAllTopics(req, res);
@@ -44,20 +44,25 @@ router.get('/', async (req, res) => {
   }
 });
 
-//sign-in page
+// sign-in page
 router.get('/signin', redirectHome, (req, res) => {
   res.render('signin', { user: null, error: null });
 });
 
-//sign-up page
+// sign-up page
 router.get('/signup', redirectHome, (req, res) => {
   res.render('signup', { user: null, error: null });
 });
 
-//account
+// account
 router.get('/account', auth, async (req, res) => {
   const posts = await getUsersPosts(req);
   res.render('account', { user: req.user, posts });
+});
+
+// code of contact
+router.get('/rules', auth, async (req, res) => {
+  res.render('rules', { user: req.user });
 });
 
 module.exports = router;

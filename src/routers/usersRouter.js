@@ -8,7 +8,7 @@ const User = require('../models/user');
 
 const router = new express.Router();
 
-//setting up multer
+// setting up multer
 const upload = multer({
   limits: {
     fileSize: 1000000000,
@@ -25,20 +25,20 @@ const upload = multer({
   },
 });
 
-//sign up
+// sign up
 router.post('/signup', async (req, res) => {
   const user = new User(req.body);
   try {
     await User.checkIfUserExists(user);
     await user.save();
     req.session.userId = user._id;
-    res.redirect('/');
+    res.status(201).redirect('/');
   } catch (e) {
-    res.render('signup', { user: null, error: e.message });
+    res.status(503).render('signup', { user: null, error: e.message });
   }
 });
 
-//sign in to account
+// sign in to account
 router.post('/signin', async (req, res) => {
   try {
     const user = await User.findByCredentials(
@@ -48,42 +48,46 @@ router.post('/signin', async (req, res) => {
     req.session.userId = user._id;
     user.online = true;
     await user.save();
-    res.redirect('/');
+    res.status(200).redirect('/');
   } catch (e) {
-    res.render('signin', { user: null, error: e.message });
+    res.status(503).render('signin', { user: null, error: e.message });
   }
 });
 
-//logout from account
+// logout from account
 router.post('/logout', auth, async (req, res) => {
   try {
     req.user.online = false;
     await req.user.save();
-    //destroy on server side
+    // destroy on server side
     req.session.destroy((error) => {
       if (error) {
-        return res.redirect('/account');
+        return res.status(400).redirect('/account');
       }
     });
-    //destroy on client side
+    // destroy on client side
     res.clearCookie(process.env.SESS_NAME);
-    res.redirect('/signin');
+    res.status(200).redirect('/signin');
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res
+      .status(503)
+      .render('error', { user: req.user, errorMessage: e.message });
   }
 });
 
-//fetch user account
+// fetch user account
 router.get('/user/account', auth, async (req, res) => {
   try {
     await getUsersPosts();
-    res.render('account', { user: req.user });
+    res.status(200).render('account', { user: req.user });
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res
+      .status(503)
+      .render('error', { user: req.user, errorMessage: e.message });
   }
 });
 
-//update user account
+// update user account
 router.post('/account/update', auth, async (req, res) => {
   const allowedUpdates = ['username', 'password'];
   const requestedUpdates = Object.keys(req.body);
@@ -98,31 +102,33 @@ router.post('/account/update', auth, async (req, res) => {
       req.user[update] = req.body[update];
     });
     await req.user.save();
-    res.redirect('/account');
+    res.status(200).redirect('/account');
   } catch (e) {
-    res.status(500).send(e.message);
+    res.status(503).send(e.message);
   }
 });
 
-//delete user account
+// delete user account
 router.delete('/account/delete', auth, async (req, res) => {
   try {
     await User.deleteOne(req.user);
-
+    //destroy on server side
     req.session.destroy((error) => {
       if (error) {
-        return res.redirect('/account');
+        return res.status(400).redirect('/account');
       }
     });
-    //destroy on client side
+    // destroy on client side
     res.clearCookie(process.env.SESS_NAME);
-    res.send();
+    res.status(200).send('User account deleted');
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res
+      .status(503)
+      .render('error', { user: req.user, errorMessage: e.message });
   }
 });
 
-//upload an avatar //update an avatar
+// upload-update an avatar
 router.post(
   '/users/me/avatar',
   auth,
@@ -135,21 +141,25 @@ router.post(
         .toBuffer();
       req.user.avatar = buffer;
       await req.user.save();
-      res.redirect('/account');
+      res.status(200).redirect('/account');
     } catch (e) {
-      res.render('error', { user: req.user, errorMessage: e.message });
+      res
+        .status(503)
+        .render('error', { user: req.user, errorMessage: e.message });
     }
   }
 );
 
-//delete avatar
+// delete avatar
 router.delete('/users/me/avatar', auth, async (req, res) => {
   try {
     req.user.avatar = undefined;
     await req.user.save();
-    res.send();
+    res.status(200).send('Avatar deleted');
   } catch (e) {
-    res.render('error', { user: req.user, errorMessage: e.message });
+    res
+      .status(503)
+      .render('error', { user: req.user, errorMessage: e.message });
   }
 });
 

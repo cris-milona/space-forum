@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Topic = require('../models/topic');
 
-//who is online
+// who is online
 const whoIsOnline = async () => {
   const usersOnline = await User.find({ online: true });
   const usernames = usersOnline.map((user) => {
@@ -10,6 +10,7 @@ const whoIsOnline = async () => {
   return usernames;
 };
 
+// get all topics from the database
 const fetchAllTopics = async (req, res) => {
   const match = {};
   if (req.query.topicStatus) {
@@ -23,7 +24,7 @@ const fetchAllTopics = async (req, res) => {
   }
 };
 
-//get all posts a user has created
+// get all posts a user has created
 const getUsersPosts = async (req) => {
   await req.user.populate({
     path: 'posts',
@@ -37,4 +38,33 @@ const getUsersPosts = async (req) => {
   return results;
 };
 
-module.exports = { whoIsOnline, getUsersPosts, fetchAllTopics };
+// handle search cases
+const searchTerms = async (req) => {
+  const topics = await Topic.find({});
+  let message;
+  //the search input is empty
+  if (req.body.search === '') {
+    return {
+      message: 'Please provide a search term',
+      searchResults: [],
+      topics,
+    };
+  }
+  // user has typed something
+  const searchResults = [];
+  const searchTerms = req.body.search.toLowerCase().split(' ');
+  searchTerms.forEach((term) => {
+    const filterResults = topics.filter((topic) => {
+      return topic.title.toLowerCase().includes(term);
+    });
+    searchResults.push(...filterResults);
+  });
+
+  if (searchResults.length === 0) {
+    message = 'This topic does not exist';
+  }
+
+  return { message, searchResults, topics };
+};
+
+module.exports = { whoIsOnline, getUsersPosts, fetchAllTopics, searchTerms };
